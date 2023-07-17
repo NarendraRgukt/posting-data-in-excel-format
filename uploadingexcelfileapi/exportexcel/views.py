@@ -4,8 +4,10 @@ from django.http import HttpResponse
 from exportexcel import serializers
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.parsers import FormParser,MultiPartParser
 
 class ExportExcelView(APIView):
+    parser_classes=[FormParser,MultiPartParser]
     def post(self, request):
         try:
             excel_file = request.FILES.get('file')  # Use get() to provide a default value if the key is not found
